@@ -1,0 +1,42 @@
+#include <iostream>
+#include <vector>
+#include <numeric>
+
+using namespace std;
+
+int main() {
+    ios_base::sync_with_stdio(false);
+    cin.tie(NULL);
+
+    int n, k;
+    cin >> n >> k;
+
+    vector<int> h(n);
+    for (int i = 0; i < n; ++i) {
+        cin >> h[i];
+    }
+
+    // Calculate the sum of the first window
+    long long current_window_sum = 0;
+    for (int i = 0; i < k; ++i) {
+        current_window_sum += h[i];
+    }
+
+    long long min_sum = current_window_sum;
+    int best_index = 1; // 1-based index for the output
+
+    // Slide the window across the array
+    for (int i = k; i < n; ++i) {
+        // Add the next element, subtract the element leaving the window
+        current_window_sum += h[i] - h[i - k];
+
+        if (current_window_sum < min_sum) {
+            min_sum = current_window_sum;
+            best_index = i - k + 2; // +1 to offset 0-indexing, +1 because 'i' is at the end of the window
+        }
+    }
+
+    cout << best_index << "\n";
+
+    return 0;
+}
