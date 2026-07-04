@@ -28,7 +28,13 @@ int main(){
 
     adj[1].push_back(4);
     adj[4].push_back(1);
-
+    for(int i=0;i<nodes;i++){
+        cout<<i<<"->";
+        for(auto it:adj[i]          ){
+            cout<<it<<" ";
+        }
+        cout<<endl;
+    }
 }
 
     
