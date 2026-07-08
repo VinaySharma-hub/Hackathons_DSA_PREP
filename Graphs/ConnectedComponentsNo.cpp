@@ -16,18 +16,28 @@ for( auto h:adj[node]){
 signed main(){
  int N;
     cin >> N;
-    vector<int> adj[N+1];
-    for (int i =0;i<N-1;i++){
+    int E;
+    cin>>E;
+    vector<int> adj[N];
+    for (int i =0;i<E;i++){
     int c,v;
     cin>>c>>v;
     adj[c].push_back(v);
     adj[v].push_back(c);
     }
-    vector<int>vis(N+1,0);
+    vector<int>vis(N,0);
     vector<int>df;
-    dfs(1,vis,df,adj);
+    int count=0;
+    for(int i=0;i<N;i++){
+        
+        if(!vis[i]){
+            count++;
+    dfs(i,vis,df,adj);
+    }
+}
     for(auto x:df){
         cout<<x<<" ";
     }
+    cout<<"Number of components are "<<count;
 
 }
