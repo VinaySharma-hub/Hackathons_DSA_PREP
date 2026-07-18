@@ -9,19 +9,24 @@ using namespace std;
 #define F first
 #define S second
 
-void solve() {
-    
-}
+
 
 int main() {
     ios::sync_with_stdio(false);
     cin.tie(nullptr);
 
-    int t = 1;
+    int t;
     cin >> t;
-    while (t--) {
-        solve();
+    vector<int>array(t);
+    for(int i =0;i<t;i++){
+cin>>array[i];
+    }
+    int counts=0;
+    for(int i=0;i<t-1;i++){
+        if(array[i]!=array[i+1]){
+            counts++;
+        }
     }
 
-    return 0;
+    cout<<counts+1;
 }
