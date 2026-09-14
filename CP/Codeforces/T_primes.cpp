@@ -1,42 +1,42 @@
-#include <bits/stdc++.h>
+#include <iostream>
+#include <vector>
+#include <cmath>
+
 using namespace std;
 
-int main()
-{
-    int n;
-    cin >> n;
+const int MAX = 1000000;
+vector<bool> is_prime(MAX + 1, true);
 
-    while (n--)
-    {
-        long long a;
-        cin >> a;
-
-        long long lo = 0, hi = sqrt(a);
-        bool found = false;
-
-        while (lo <= hi)
-        {
-            long long mid = lo + (hi - lo) / 2;
-            long long sq = mid * mid;
-
-            if (sq == a)
-            {
-                found = true;
-                break;
-            }
-            else if (sq < a)
-            {
-                lo = mid + 1;
-            }
-            else
-            {
-                hi = mid - 1;
+void sieve() {
+    is_prime[0] = is_prime[1] = false;
+    for (int i = 2; i * i <= MAX; i++) {
+        if (is_prime[i]) {
+            for (int j = i * i; j <= MAX; j += i) {
+                is_prime[j] = false;
             }
         }
-
-        if (found)
-            cout << "YES\n";
-        else
-            cout << "NO\n";
     }
+}
+
+int main() {
+    ios::sync_with_stdio(false);
+    cin.tie(nullptr);
+
+    sieve(); // Precompute primes up to 10^6
+
+    int t;
+    cin >> t;
+    while (t--) {
+        long long n; // Make sure to use long long for n up to 10^12
+        cin >> n;
+
+        long long sq = round(sqrt(n));
+        if (sq * sq == n && is_prime[sq]) {
+            cout << "YES\n";
+        } else {
+            cout << "NO\n";
+        }
+    }
+
+    return 0;
 }
